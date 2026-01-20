@@ -1,8 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import "./styles/NavBar.css";
 
 function NavBar() {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    // Remove the token from localStorage
+    localStorage.removeItem("jwt");
+    // Navigate to the login page
+    navigate("/login");
+  };
   return (
     <div className="navbar">
       <div className="navbar__logo">
@@ -20,7 +27,12 @@ function NavBar() {
           </NavLink>
         </li>
         <li>
-          <button className="navbar__link navbar__button">Sign Out</button>
+          <button
+            className="navbar__link navbar__button"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
         </li>
       </ul>
     </div>
